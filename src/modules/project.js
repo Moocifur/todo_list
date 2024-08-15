@@ -1,7 +1,3 @@
-//name of project
-//tasks inside?
-
-//create standard soldier
 export class Project {
     constructor(name) {
         this.name = name;

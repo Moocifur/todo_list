@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app">
@@ -15,8 +15,14 @@
             <aside id="sidebar">
                 <h2>Projects</h2>
                 <ul id="project-list">
-                    <!--Will be dynamically placed-->
+                    <!--Working on this now. i see why its just a li added-->
                 </ul>
+                
+                <div id="new-project">
+                    <input type="text" id="new-project-name" placeholder="New Project Name">
+                    <button id="add-project">Add Project</button>
+                </div>
+
             </aside>
             <main id="main-content">
                 <h2 id="project-title">Project Title</h2>
@@ -35,6 +41,6 @@
             <p>Made by Meeeh</p>
         </footer>
     </div>
-    <script src="index.js"></script>
+    <script src="dist/main.bundle.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 //dom.js
 //This module handles rendering of project list and tasklist to the Dom.
 
-import { projects, currentProjectIndex } from '../index.js';
+import { projects, currentProjectIndex, saveToLocalStorage } from '../index.js';
 
 //Function to render the list of projects in the sidebar
 export function renderProjectList() {
@@ -19,6 +19,28 @@ export function renderProjectList() {
             renderTaskList(); //Render the tasks for the selected project
         });
 
+        //add delete button for each project
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            projects.splice(index, 1);
+            if (index === currentProjectIndex) {
+                currentProjectIndex = 0;
+            } else if (index < currentProjectIndex) {
+                currentProjectIndex--;
+            }
+            saveToLocalStorage();
+            renderProjectList();
+            if (project.length > 0) {
+                renderTaskList();
+            } else {
+                document.getElementById('task-list').innerHTML = '';
+                document.getElementById('project-title').textContent = '';
+            }
+        })
+
+        projectItem.appendChild(deleteButton);
         projectListElement.appendChild(projectItem); //Add the project item to the list
     });
 }
@@ -47,12 +69,15 @@ export function renderTaskList() {
             taskItem.classList.toggle('completed', task.isComplete); // Update the UI to reflect the new status
         });
 
+        //delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.addEventListener('click', () => {
-            
-        })
+            project.removeTask(index);
+            renderTaskList();
+        });
 
+        taskItem.appendChild(deleteButton);
         taskListElement.appendChild(taskItem);
     });
 }
